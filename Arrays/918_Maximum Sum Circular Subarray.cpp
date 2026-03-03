@@ -28,3 +28,39 @@ public:
         return maxi;
     }
 };
+
+// Optimal Approach O(N)
+class Solution {
+public:
+    int kadane_max(vector<int> nums){
+        int n = nums.size();
+        int global = nums[0];
+        int curr_max = nums[0];
+        for(int i = 1;i<n;i++){
+            curr_max = max(curr_max+nums[i],nums[i]);
+            global = max(global,curr_max);
+        }
+        return global;
+    }
+    int min_kadane(vector<int>&nums){
+        int n = nums.size();
+        int global = nums[0];
+        int curr_min = nums[0];
+        for(int i = 1;i<n;i++){
+            curr_min = min(curr_min+nums[i],nums[i]);
+            global = min(global,curr_min);
+        }
+        return global;
+    }
+    int maxSubarraySumCircular(vector<int>& nums) {
+        int n = nums.size();
+        int total = 0;
+        for(int & num : nums)
+            total += num;
+        int maxi = kadane_max(nums);
+        if(maxi<0)
+            return maxi;
+        int maxi2 = total - min_kadane(nums);
+        return max(maxi,maxi2);
+    }
+};
