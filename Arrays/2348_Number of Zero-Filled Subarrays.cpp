@@ -17,3 +17,26 @@ public:
 
     }
 };
+//Approach 2
+class Solution {
+public:
+    long long zeroFilledSubarray(vector<int>& nums) {
+        long long ans = 0;
+        int i = 0;
+        int n = nums.size();
+        while(i<n){
+            long long x = 0;
+            if(nums[i]==0){
+                int start = i;
+                while(i<n && nums[i]==0){
+                    x += i-start + 1;
+                    i++;
+                }
+            }
+            else
+                i++;
+            ans += x;
+        }
+        return ans;
+    }
+};
