@@ -40,3 +40,22 @@ public:
         return ans;
     }
 };
+
+//Why did not I guess this || Approach 3 (Best ez code)
+class Solution {
+public:
+    long long zeroFilledSubarray(vector<int>& nums) {
+        int n = nums.size();
+        long long res = 0;
+        int count = 0;
+        for(int i = 0;i<n;i++){
+            if(nums[i]==0){
+                count++;
+            }
+            else
+                count = 0;
+            res += count;
+        }
+        return res;
+    }
+};
