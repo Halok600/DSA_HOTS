@@ -11,3 +11,12 @@ public:
 
     }
 };
+//SOLVED APPROACH 2 PYTHON
+class Solution:
+    def rotateString(self, s: str, goal: str) -> bool:
+        res = s + s
+        if len(s) != len(goal):
+            return False
+        if goal in res:
+            return True
+        return False
