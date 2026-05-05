@@ -31,5 +31,27 @@ public:
         return newHead;
     }
 };
-
+//PYTHON SOLUTION
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        if not head or not head.next or k==0:
+            return head
+        list_size = 1
+        tail = head
+        while tail.next:
+            list_size+=1
+            tail = tail.next
+        k = k % list_size
+        tail.next = head
+        newTail = head
+        for i in range(list_size-k-1):
+            newTail = newTail.next
+        newHead = newTail.next
+        newTail.next = None
+        return newHead
 
