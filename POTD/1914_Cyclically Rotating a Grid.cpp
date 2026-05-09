@@ -50,3 +50,47 @@ public:
         return grid;
     }
 };
+
+// PYTHON SOLUTION
+class Solution:
+    def rotateGrid(self, grid: List[List[int]], k: int) -> List[List[int]]:
+        m = len(grid)
+        n = len(grid[0])
+        layers = min(m//2,n//2)
+        for layer in range(layers):
+            nums = []
+            left,top = layer,layer
+            bottom,right = m-layer-1,n-layer-1
+            #From (TOP) left to right
+            for j in range(left,right+1):
+                nums.append(grid[top][j])
+            #From (Right) top to bottom
+            for i in range(top+1,bottom):
+                nums.append(grid[i][right])
+            #From (BOTTOM) right to left
+            for j in range(right,left-1,-1):
+                nums.append(grid[bottom][j])
+            #FROM (left) bottom to top
+            for i in range(bottom-1,top,-1):
+                nums.append(grid[i][left])
+            size = len(nums)
+            newK = k%size
+            nums = nums[newK:] + nums[:newK]
+            idx = 0
+            # top (LEFT->RIGHT)
+            for j in range(left,right+1):
+                grid[top][j] = nums[idx]
+                idx+=1
+            #right (TOP->BOTTOM)
+            for i in range(top+1,bottom):
+                grid[i][right] = nums[idx]
+                idx+=1
+            #bottom (RIGHT->LEFT)
+            for j in range(right,left-1,-1):
+                grid[bottom][j] = nums[idx]
+                idx+=1
+            #left (BOTTOM->TOP)
+            for i in range(bottom-1,top,-1):
+                grid[i][left] = nums[idx]
+                idx+=1
+        return grid        
