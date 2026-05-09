@@ -24,3 +24,25 @@ public:
         return ans;
     }
 };
+
+//python solution
+class Solution:
+    def maxValue(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        maxLeft = [0]*n
+        minRight = [0]*n
+        maxLeft[0] = nums[0]
+        minRight[n-1] = nums[n-1]
+
+        for i in range(1,n):
+            maxLeft[i] = max(maxLeft[i-1],nums[i])
+        for i in range(n-2,-1,-1):
+            minRight[i] = min(minRight[i+1],nums[i])
+        ans = [0]*n
+        ans[n-1] = maxLeft[n-1]
+        for i in range(n-2,-1,-1):
+            if maxLeft[i]<=minRight[i+1]:
+                ans[i] = maxLeft[i]
+            else:
+                ans[i] = ans[i+1]
+        return ans
