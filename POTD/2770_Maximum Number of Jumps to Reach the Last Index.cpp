@@ -23,3 +23,23 @@ public:
         return (res<0) ? -1 : res;
     }
 };
+
+//PYTHON MEMO SOLUTION
+class Solution:
+    def maximumJumps(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        memo = [-10**9]*n
+        def solve(idx):
+            if idx == n-1:
+                return 0
+            if memo[idx]!=-10**9:
+                return memo[idx]
+            res = -10**9
+            for j in range(idx+1,n):
+                if abs(nums[j]-nums[idx])<=target:
+                    temp = 1+solve(j)
+                    res = max(res,temp)
+            memo[idx] = res
+            return memo[idx]
+        res = solve(0)
+        return res if res>=0 else -1
