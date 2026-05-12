@@ -36,3 +36,27 @@ public:
         return res;
     }
 };
+//PYTHON SOLUTION
+class Solution:
+    def isPossible(self,tasks: List[List[int]],mid : int)->bool:
+        for task in tasks:
+            mini = task[1]
+            act = task[0]
+            if mini>mid:
+                return False
+            mid = mid - act
+        return True
+    def minimumEffort(self, tasks: List[List[int]]) -> int:
+        left = 0
+        right = int(1e9)
+        res = int(1e9)
+        tasks.sort(key = lambda x: x[1]-x[0],reverse = True)
+        while left<=right:
+            mid = left + (right-left)//2
+            if self.isPossible(tasks,mid):
+                res = mid
+                right = mid-1
+            else:
+                left = mid+1
+        return res
+
